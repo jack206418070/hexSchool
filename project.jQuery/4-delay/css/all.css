@@ -1,0 +1,24 @@
+.box1, 
+.box2,
+.box3{
+  width: 100px;
+  height: 100px;
+  float: left;
+  display: none;
+}
+
+.box1{
+  background: purple;
+}
+
+.box2{
+  background: green;
+}
+
+.box3{
+  background: red;
+}
+
+.changecolor{
+  background: pink;
+}

@@ -1,0 +1,23 @@
+h2{
+    margin-left: 65px;
+}
+
+
+.signin{
+    width: 375px;
+    margin: 15px auto;
+}
+
+input{
+    margin: 5px 0 0 0;
+}
+
+.login{
+    width: 375px;
+    margin: 15px auto;
+}
+
+.Ajax-check{
+    color:red;
+    display:none;
+}

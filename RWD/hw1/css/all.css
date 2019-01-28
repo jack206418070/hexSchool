@@ -1,0 +1,229 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font: inherit;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+html {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+caption, th, td {
+	text-align: left;
+	font-weight: normal;
+	vertical-align: middle;
+}
+q, blockquote {
+	quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+	content: "";
+	content: none;
+}
+a img {
+	border: none;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+	display: block;
+}
+html {
+}
+*,*:before,*:after{
+	box-sizing: border-box;
+}
+img{
+	max-width: 100%;
+	height: auto;
+}
+
+a{
+    display: block;
+    text-decoration: none;
+}
+
+.clearfix{
+    clear: both;
+}
+
+h2 , p , a{
+    font-family: "Microsoft JhengHei"
+}
+/* reset */
+
+.wrap{
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.topbar{
+    width: 100%;
+    height: 20px;
+    background:#f6f6f6;
+    padding: 10px;
+}
+
+
+.topbar ul{
+    float: right;
+}
+
+.topbar ul li{
+    float: left;
+    margin: 0 2px;
+    padding-top: 5px;
+}
+
+.topbar li img{
+    float: left;
+    margin: 0 2px;
+}
+
+.topbar li span{
+    float: left;
+}
+
+.facebook{
+    border-right: 2px solid lightgray;
+    padding-right: 5px;
+}
+
+.twitter{
+    color: #3fb5ed;
+}
+
+.topbar a:hover{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* topbar */
+
+.header{
+    margin:20px 0;
+    border-bottom: 4px solid lightgray;
+}
+
+
+.logo{
+    float: left;
+    padding: 5px;    
+}
+
+.logo a{
+    background: url("../images/images/logo.png") no-repeat;
+    width: 179px;
+    height: 36px;
+    text-indent: 101%;
+    overflow: hidden;
+}
+
+@media (max-width:569px){
+    .logo{
+        float:none;
+    }
+    .logo a{
+        margin: 0 auto;
+    }
+}
+
+/* logo */
+
+.menu ul{
+    float: right;
+}
+
+.menu li{
+    float: left;
+}
+
+.menu li a{
+    padding: 14px;
+    color: #6bdab8;
+    text-align: center;
+    border-bottom: 3px solid #fff;
+}
+
+.menu a:hover{
+    border-bottom: 3px solid  #6bdab8;
+}
+
+@media (max-width:768px){
+    .header{
+        border-bottom:none;
+    }
+    .menu ul{
+        width: 50%;
+    }
+    .menu li{
+        width: 50%;
+    }
+    .menu a:hover{
+        background: #6bdab8;
+        color:black;
+    }
+}
+
+@media (max-width:569px){
+    .menu ul{
+        width: 99%;
+    }
+    .menu li{
+        width: 99%;
+    }
+    .menu li a{
+        background: lightslategray;
+        margin-bottom: 5px;
+        color: yellow;
+        height: 44px;
+    }
+    .menu a:hover{
+        background: #6bdab8;
+        color:black;
+        border-bottom: none;
+    }
+}
+
+/* menu */
+
+.content li{
+    width: 31.33333%;
+    min-height: 350px;
+    margin: 1%;
+    border-radius: 2px;
+    float: left;
+    box-shadow: 0 2px 2px gray;
+}
+
+@media (max-width:768px){
+    .content li{
+        float: none;
+        width: 90%;
+        margin-bottom: 24px;
+    }
+}
+
+.content img{
+	margin: auto;
+	display: block;
+}
+
+.content h2{
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.content p{
+    padding: 10px;
+    letter-spacing: 2px;
+    line-height: 150%;    
+}
+/* content */

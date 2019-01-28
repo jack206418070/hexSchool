@@ -1,0 +1,225 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+ h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.confix{
+    clear: both;
+}
+
+img{
+    height: 18px;
+    width: 18px;
+}
+
+.wrap{
+    height: auto;
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+
+.hero{
+    margin: 0 auto;
+    background-image: url("../images/Hero.png");
+    height: 360px;
+    width: auto;
+    border: 1px solid black;
+}
+
+.hero h1{
+    color:#fff;
+    height: 40px;
+    width: 265px;
+    text-align: center;
+    letter-spacing: 3px;
+    margin: 89px 378.5px 70px 380.5px;
+}
+
+.hero .choice{
+    height: 48px;
+    width: 452px;
+    margin: 0 auto;
+    margin-bottom: 70px;
+}
+
+.hero select{
+    width: 100%;
+    height: 100%;
+}
+
+.header{
+    height: 80px;
+    width: 748px;
+    padding: 15px;
+    margin: 0 auto;
+    background-color:white;
+    border: 3px solid lightgray;
+    border-radius: 10px;
+    box-shadow: 3px lightgray;
+    margin-bottom: 60px;
+}
+.header h2{
+    padding-bottom: 5px;
+}
+
+.header ul{
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+.header ul li{
+    float: left;
+    padding: 3px;
+    margin-right: 20px;
+    width: 100px;
+    height: 35px;
+    border-radius: 10px;
+}
+
+.header ul a{
+    font-size: 20px;
+    color:#fff;
+    line-height: 35px;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+.footer{
+    height: 50px;
+    background: #559AC8;
+    padding: 20px;
+
+}
+
+.footer p{
+    padding: 5px;
+    text-align: center;
+    font-size: 12px;
+}
+
+
+.content{
+    width: 100%;
+}
+
+.content ul{
+    margin: 0 auto;
+}
+
+
+.content ul li{
+    width: 464px;
+    height: 273px;
+    border: 2px solid lightgray;
+    border-radius: 5px;
+    box-shadow: 3px lightgray;
+    float: left;
+    margin-left: 28px;
+    margin-bottom: 20px;
+}
+
+.content .countryId{
+    text-align: center;
+    font-size: 45px;
+    color:#8A82CC;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.photo{
+    height: 155px;
+    background-position: center center;
+    background-size: cover;
+    border:1px solid white;
+}
+
+.photo h4{
+    color:white;
+    font-size: 25px;
+    margin-top: 117px;
+    margin-left: 22px;
+    letter-spacing: 3px;
+    float: left;
+}
+
+
+.content .list .photo p{
+    color:#fff;
+    margin-right: 19px;
+    margin-top: 125px;
+    font-size: 20px;
+    float: right;
+    letter-spacing: 3px;
+}
+
+.content .list li .section p{
+    color:black;
+    letter-spacing: 2px;
+    margin: 5px 0;
+    margin-left: 15px;
+}
+
+.content .list li .section .tag_left{
+    color:black;
+    letter-spacing: 2px;
+    margin: 5px 0;
+    margin-left: 15px;
+    float: left;
+}
+
+.content .list li .section .tag_right{
+    color:black;
+    letter-spacing: 2px;
+    margin: 5px 0;
+    margin-left: 15px;
+    float: right;
+    margin-right: 11px;
+}

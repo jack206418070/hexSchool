@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="js/jquery-2.2.3.min.js"></script>
+  <script src="js/all.js"></script>
+  <style>
+    .text{
+      /* opacity 透明程度 */
+      opacity:0;
+      /* transition : 選擇元素 時間 */
+      transition: all 3s;
+    }
+    .text.active{
+      opacity:1;
+    }
+  </style>
+</head>
+<body>
+  <input type="button" class="button" value="留言">
+  <div class="text">
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <input type="submit" value="送出">
+  </div>
+  
+
+</body>
+</html>

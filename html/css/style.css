@@ -1,0 +1,339 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+
+table {
+	border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0 auto 80px auto;
+}
+
+.topbar{
+    width: 1000px;
+    height: 40px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.topbar ul{
+    float: right;
+}
+
+.topbar ul li{
+    float: left;
+    margin: 5px;
+}
+
+.topbar ul a{
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.topbar li img{
+    float: left;
+    margin-right: 5px;
+}
+
+.topbar li span{
+    float: left;
+}
+
+.facebook{
+    border-right: 2px solid gray;
+    padding-right: 15px;
+}
+
+.twitter span{
+    color: #00aaec;
+}
+
+.header{
+    margin: 0 auto;
+    width: 1000px;
+    height: 40px;
+    margin-bottom: 40px;
+}
+
+.logo{
+    display: block;
+    float: left;
+    width: 173px;
+    height: 36px;
+    background: url("../img/logo.png");
+    text-indent: 101%;
+    overflow: hidden;
+}
+
+.header ul{
+    float: right;
+}
+
+.header ul li{
+    margin-right: 30px;
+    float: left;
+}
+
+.header li a{
+    display: block;
+    color: #00cc99;
+    text-decoration: none;
+    font-size: 20px;
+    line-height: 40px;
+}
+
+.home a{
+    border-bottom: 3px solid #00cc99;    
+}
+
+.action{
+    margin: 0 auto;
+    width: 1000px;
+    height: 346px;
+    background: url("../img/images/action_03.png");
+    margin-bottom: 50px;
+}
+
+.action p{
+    color: white;
+    padding-left: 20px;
+    font-size: 35px;
+    font-family:Microsoft JhengHei;
+}
+
+.prg{
+    padding-top: 130px;
+    padding-bottom: 10px;
+}
+
+.article{
+    height: 400px;
+    width: 1000px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+.left{
+    height: auto;
+    width: 315px;
+    float: left;
+    margin-left: 16px;
+    border-bottom: 5px solid #f7f7f7;
+}
+
+.middle{
+    height: auto;
+    width: 315px;
+    float: left;
+    margin-left: 16px;
+    border-bottom: 5px solid #f7f7f7;
+    
+}
+
+.right{
+    height: auto;
+    width: 315px;
+    float: left;
+    margin-left: 22px;
+    border-bottom: 5px solid #f7f7f7;
+    
+}
+
+.article img{
+    margin-bottom: 10px;
+}
+
+.article .right img{
+    margin-left: 20px;
+}
+
+.article h3{
+    font-weight: bold;
+    font-size: 20px;
+    font-family:Microsoft JhengHei;
+    text-align: center;
+}
+
+.left p{
+    font-size: 16px;
+    padding: 12px;
+    line-height: 30px;
+    letter-spacing: 2px;
+}
+
+.right p{
+    padding: 15px 15px 5px 15px;
+}
+
+.right ul{
+    margin-left: 40px;
+    padding-bottom: 42px;
+}
+
+.right li{
+    font-size: 16px;
+    padding: 4px;
+    list-style: initial;
+}
+
+.middle p{
+    font-size: 16px;
+    padding: 15px;
+    line-height: 24px;
+    letter-spacing: 2px;
+}
+.clearfix{
+    clear: both;
+}
+
+h2{
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.price th , .price td{
+    font-size: 15px;
+    border-top:1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    
+}
+
+
+.price td{
+    padding: 10px;
+    color:black;
+    padding-right: 120px;
+}
+
+.title{
+    font-weight: bold;
+    background: #f7f7f7;
+}
+
+.price  tr .bestcase{
+    color: #00a37d;
+}
+
+.form_box{
+    margin: 0 auto;
+    width: 1000px;
+    height: 500px;
+    /* background: url("../imG/bg.png"); */
+    background: -webkit-linear-gradient(left,#00644b,#007658);
+    background: -o-linear-gradient(left,#00644b,#007658);
+    margin-bottom: 50px;
+}
+
+
+
+.headertext{
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
+
+.form_box h3{
+    margin:0;
+    margin-bottom: 5px;
+    color:white;
+    font-size: 30px;
+    text-align: center;
+}
+
+textarea{
+    margin-left: 30px;
+    width: 450px;
+    height: 300px;
+    margin-right: 100px;
+    float: left;
+    font-size: 20px;
+}
+.right_form{
+    float: left;
+}
+
+label{
+ font-weight: bold;
+ color:white
+}
+
+.text_input{
+    margin-top: 5px;
+    margin-bottom: 15px;
+    width: 350px;
+    height: 40px;
+    font-size: 20px;
+}
+
+.submit_input{
+    margin:40px 0 0 270px;
+    width: 80px;
+    height: 30px;
+    background: #00cc99;
+    border:#00cc99;
+    border-radius: 5px;
+    cursor: pointer;
+    color:white;
+}
+
+.footer{
+    height: 40px;
+    width: 1000px;
+    margin: auto;
+    background: url("../img/footer.png") no-repeat;
+    margin-bottom: 40px;
+}
+
+.footer_right{
+    float: right;
+}
+
+.footer_right p{
+    padding-top: 8px;
+    font-family:Microsoft JhengHei;
+}
+
+.footer_right span{
+    color: #e55995;
+}
