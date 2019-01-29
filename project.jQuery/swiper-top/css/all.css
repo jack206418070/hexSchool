@@ -1,0 +1,18 @@
+.swiper-container {
+    width: 618px;
+    height: 246px;
+}
+
+
+
+
+
+.lightBox{
+    width: 1024px;
+    margin: 50px auto;
+}
+
+
+.lightBox img{
+    width: 33%;
+}
