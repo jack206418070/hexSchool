@@ -65,12 +65,21 @@ table {
   height: 250px;
   width: 200px;
   top:0;
+  overflow: hidden;
+  
   bottom: 0;
   right: 0;
   transform: translateX(200px);
 }
 
-
+.box{
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  bottom:0;
+  left: 0;
+  background: green;
+}
 .header{
   height: 50px;
   background: red;
