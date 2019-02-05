@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .clock-wrap {
+            background: url('./img/clock-bg.png') no-repeat;
+            background-size: contain;
+            width: 350px;
+            height: 350px;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        .center-point {
+            position: absolute;
+            top: 49.5%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            width: 3px;
+            height: 3px;
+            background: black;
+            z-index: 999;
+        }
+
+        .hour-hand {
+            position: absolute;
+            top: 48.5%;
+            left: 50.2%;
+            transform-origin: center left;
+        }
+
+        .min-hand {
+            position: absolute;
+            top: 22%;
+            left: 49%;
+            transform-origin: 50% 100%;
+        }
+
+        .sec-hand {
+            position: absolute;
+            top: 49.5%;
+            left: 48%;
+            transform-origin: 50% 0%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="app" class="clock-wrap">
+        <div class="center-point"></div>
+        <img class="hour-hand" v-bind:style="hourStyle" src="./img/hour-hand.svg" alt="">
+        <img class="min-hand" v-bind:style="minStyle" src="./img/minute-hand.svg" alt="">
+        <img class="sec-hand" v-bind:style="secStyle" src="./img/second-hand.svg" alt="">
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.22/vue.js"></script>
+    <script>
+
+        let timer = null
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                hour: 0,
+                min: 0,
+                sec: 0,
+            },
+            methods: {
+                getTime() {
+                    const time = new Date()
+                    const vm = this
+                    timer = setTimeout(function () {
+                        vm.hour = time.getHours()
+                        vm.min = time.getMinutes()
+                        vm.sec = time.getSeconds()
+                        if(vm.hour > 12){
+                            vm.hour = vm.hour - 12
+                        }else{
+                            vm.hour = vm.hour
+                        }
+                        vm.getTime()
+                    }, 1000)
+                },
+            },
+            computed: {
+                secStyle() {
+                    return { transform: `rotate(${180+this.sec*6}deg)` }
+                },
+                minStyle() {
+                    return { transform: `rotate(${0+this.min*6}deg)` }
+                },
+                hourStyle() {
+                    return { transform: `rotate(${-90+this.hour*30+this.min/2}deg)` }
+                }
+            },
+            mounted() {
+                this.getTime()
+            },
+            beforeDestroy() {
+                clearTimeout(timer)
+            }
+        })
+
+    </script>
+</body>
+
+</html>
