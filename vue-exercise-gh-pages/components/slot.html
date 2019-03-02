@@ -126,6 +126,8 @@
 
   <h2>Slot 基礎範例</h2>
   <single-slot-component>
+  </single-slot-component>
+  <single-slot-component>
     <p>使用這段取代原本的 Slot。</p>
   </single-slot-component>
 
@@ -134,10 +136,10 @@
   </named-slot-component>
 
   <named-slot-component>
-    <header>替換的 Header</header>
-    <template>替換的 Footer</template>
-    <template>按鈕內容</template>
-    <p>其餘的內容</p>
+    <header slot="header">這是slot header</header>
+    <template slot="footer">這是slot footer</template>
+    <!-- <template>按鈕內容</template> -->
+    <p name="text">其餘的內容</p>
   </named-slot-component>
 </div>
 
@@ -153,19 +155,22 @@
 <script type="text/x-template" id="singleSlotComponent">
 <div class="alert alert-warning">
   <h6>我是一個元件</h6>
-  <div>
+  <slot>
     如果沒有內容，則會顯示此段落。
-  </div>
+  </slot>
+  <!-- <div>
+    如果沒有內容，則會顯示此段落。
+  </div> -->
 </div>
 </script>
 
 <script type="text/x-template" id="namedSlotComponent">
 <div class="card my-3">
   <div class="card-header">
-    <div>這段是預設的文字</div>
+    <slot name="header"></slot>
   </div>
   <div class="card-body">
-    <slot>
+    <slot name="text">
       <h5 class="card-title">Special title treatment</h5>
       <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
     </slot>
@@ -173,9 +178,7 @@
       <div>spanGo somewhere</div>
     </a>
   </div>
-  <div class="card-footer">
-    <div>這是預設的 Footer</div>
-  </div>
+  <slot name="footer"></slot>
 </div>
 </script>
 
