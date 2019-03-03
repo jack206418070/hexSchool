@@ -122,14 +122,14 @@
     <li>將資料內容透過 "元件" 呈現</li>
     <li>製作城市過濾選項</li>
     <li>將內層資料透過 emit 傳遞到外層 (作為另一個關注城市的呈現)</li>
-    <li>依據不同污染呈現不同色彩</li>
+    <li>依據不同污染呈現不同色彩</li>  actions
     <li>加分題：透過 localStorage 儲存上次關注的城市</li>
   </ol>
 </div>
 
 <div id="app">
   <select name="" id="" class="form-control mb-3">
-    <option value="">--- 請選擇城市 ---</option>
+    <option v-for="(item,index) in location" value="">{{ item }}</option> 
   </select>
   <div>
     <h4>關注城市</h4>
@@ -223,14 +223,27 @@ var app = new Vue({
       // 使用 jQuery ajax
       $.get(api).then(function( response ) {
         vm.data = response;
-        console.log(response)
+        let tempCountry = []
+        response.forEach((item,index) =>{
+          tempCountry.push(response[index].County)
+        })
+        vm.location = tempCountry.filter((el,index,arr)=>{
+          return arr.indexOf(el) === index
+        })
       });
     },
-    computed: {
-      getCityName(){
-        return 
-      }
-    },
+    // computed: {
+    //   getCityName: function(){
+    //     let tempCountry = []
+    //     this.data.forEach((item,index) =>{
+    //       tempCountry.push(this.data[index].Country)
+    //     })
+    //     this.location.filter((el,index,arr)=>{
+    //       return arr.indexOf(el) === index
+    //     })
+    //     return location
+    //   }
+    // },
   }
 });
 </script>
