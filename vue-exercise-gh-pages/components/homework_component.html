@@ -168,10 +168,41 @@
   </div>
 </div>
 
+<script type="text/x-template" id="primary-component">
+  <div>
+      <h4>關注城市</h4>
+      <div class="card-columns">
+        <div class="card status-aqi2">
+          <div class="card-header">苗栗縣 - 三義
+            <a href="#" class="float-right"><i class="fas fa-star"></i></a>
+          </div>
+          <div class="card-body">
+            <ul class="list-unstyled">
+              <li>AQI 指數: 54</li>
+              <li>PM2.5: 8</li>
+              <li>說明: 普通</li>
+            </ul>
+            2018-05-20 16:00
+          </div>
+        </div>
+      </div>  
+</script>
+
+
 <script>
 // API 來源
 // https://opendata.epa.gov.tw/Data/Contents/AQI/
+Vue.component('primary-component',{
+  
+})
 
+Vue.component('warn-component',{
+
+})
+
+Vue.component('danger-component',{
+
+})
 var app = new Vue({
   el: '#app',
   data: {
@@ -179,6 +210,9 @@ var app = new Vue({
     location: [],
     stared: [],
     filter: '',
+  },
+  created:function(){
+    this.getData()
   },
   // 請在此撰寫 JavaScript
   methods: {
@@ -191,6 +225,11 @@ var app = new Vue({
         vm.data = response;
         console.log(response)
       });
+    },
+    computed: {
+      getCityName(){
+        return 
+      }
     },
   }
 });
