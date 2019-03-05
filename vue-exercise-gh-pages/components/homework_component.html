@@ -129,7 +129,8 @@
 
 <div id="app">
   <select name="" id="" class="form-control mb-3">
-    <option v-for="(item,index) in location" value="">{{ item }}</option> 
+    <option value="">--請選擇下列城市--</option>
+    <option v-for="(item,index) in location"  :key="index">{{ item }}</option> 
   </select>
   <div>
     <h4>關注城市</h4>
@@ -152,6 +153,10 @@
   
   <hr>
   <div class="card-columns">
+    <primary-component  v-for="(item,key) in data" :post="item" :key="key"></primary-component>
+  </div>
+</div>
+<script type="text/x-template" id="primary-component">
     <div class="card status-aqi2">
       <div class="card-header">苗栗縣 - 三義
         <a href="#" class="float-right"><i class="far fa-star"></i></a>
@@ -165,27 +170,6 @@
       2018-05-20 16:00
       </div>
     </div>
-  </div>
-</div>
-
-<script type="text/x-template" id="primary-component">
-  <div>
-      <h4>關注城市</h4>
-      <div class="card-columns">
-        <div class="card status-aqi2">
-          <div class="card-header">苗栗縣 - 三義
-            <a href="#" class="float-right"><i class="fas fa-star"></i></a>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled">
-              <li>AQI 指數: 54</li>
-              <li>PM2.5: 8</li>
-              <li>說明: 普通</li>
-            </ul>
-            2018-05-20 16:00
-          </div>
-        </div>
-      </div>  
 </script>
 
 
@@ -193,23 +177,18 @@
 // API 來源
 // https://opendata.epa.gov.tw/Data/Contents/AQI/
 Vue.component('primary-component',{
-  
-})
-
-Vue.component('warn-component',{
-
-})
-
-Vue.component('danger-component',{
-
+  prop:['post'],
+  template:'#primary-component'
 })
 var app = new Vue({
   el: '#app',
-  data: {
-    data: [],
-    location: [],
-    stared: [],
-    filter: '',
+  data(){
+    return{
+      data: [],
+      location: [],
+      stared: [],
+      filter: '',
+    }
   },
   created:function(){
     this.getData()
@@ -232,18 +211,17 @@ var app = new Vue({
         })
       });
     },
-    // computed: {
-    //   getCityName: function(){
-    //     let tempCountry = []
-    //     this.data.forEach((item,index) =>{
-    //       tempCountry.push(this.data[index].Country)
-    //     })
-    //     this.location.filter((el,index,arr)=>{
-    //       return arr.indexOf(el) === index
-    //     })
-    //     return location
-    //   }
-    // },
+    computed: {
+      getSelectData(){
+        const vm = this
+        vm.data.forEach((item,index) =>{
+          if(vm.location === vm.data[index].County){
+            vm.filter.push(vm.data[index].County)
+          }
+        })
+        return vm.filter
+      }
+    },
   }
 });
 </script>
