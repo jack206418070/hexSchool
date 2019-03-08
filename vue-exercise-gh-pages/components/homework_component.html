@@ -144,31 +144,22 @@
           <div>
             <h4>關注城市</h4>
             <div class="card-columns">
-              <div class="card status-aqi2">
-                <div class="card-header">苗栗縣 - 三義
-                  <a href="#" class="float-right"><i class="fas fa-star"></i></a>
-                </div>
-                <div class="card-body">
-                  <ul class="list-unstyled">
-                    <li>AQI 指數: 54</li>
-                    <li>PM2.5: 8</li>
-                    <li>說明: 普通</li>
-                  </ul>
-                  2018-05-20 16:00
-                </div>
-              </div>
+              
+            <primary-component v-for></primary-component>
+
             </div>
           </div>
 
           <hr>
           <div class="card-columns">
-            <primary-component v-for="(item,key) in getSelectData" :key="key" :post="item"></primary-component>
+            <primary-component v-for="(item,key) in getSelectData" :key="key" :post="item" @add="getStatedData"></primary-component>
           </div>
         </div>
   <script type="text/x-template" id="primary-component">
-    <div class="card status-aqi2">
-      <div class="card-header">{{ post.County }} - {{ post.SiteName }}
-        <a href="#" class="float-right"><i class="far fa-star"></i></a>
+    <div class="card">
+      <div class="card-header" :class="getStatusColor">{{ post.County }} - {{ post.SiteName }}
+        <a href="#" class="float-right" @click.prevent="getStatedData(post)" v-if="!post.star" :key="1"><i class="far fa-star"></i></a>
+        <a href="#" class="float-right" @click.prevent="getStatedData(post)" v-if="post.star" :key="2"><i class="fas fa-star"></i></a>
       </div>
       <div class="card-body">
         <ul class="list-unstyled">
@@ -187,7 +178,33 @@
           // https://opendata.epa.gov.tw/Data/Contents/AQI/
           Vue.component('primary-component', {
             props: ['post'],
-            template: '#primary-component'
+            template: '#primary-component',
+            methods:{
+              addStar(){
+                this.$emit('add',this.post)
+              }
+            },
+            computed:{
+              getStatusColor(){
+                switch(this.post.Status){
+                  case '良好':
+                    return 'status-aqi2'
+                    break
+                  case '普通':
+                    return 'status-aqi3'
+                    break
+                  case '對敏感族群不健康':
+                    return 'status-aqi4'
+                    break
+                  case '對所有族群不健康':
+                    return 'status-aqi5'
+                    break
+                  case '設備維護':
+                    return 'status-aqi6'
+                    break
+                }
+              }
+            }
           })
           var app = new Vue({
             el: '#app',
@@ -196,6 +213,7 @@
               location: [],
               stared: [],
               filter: '',
+              // statusType: []
             },
             // 請在此撰寫 JavaScript
             methods: {
@@ -208,14 +226,32 @@
                 $.get(api).then(function (response) {
                   vm.data = response;
                   let tempCountry = []
+                  // let tempStatus = []
                   response.forEach((item, index) => {
                     tempCountry.push(response[index].County)
                   })
                   vm.location = tempCountry.filter((el, index, arr) => {
                     return arr.indexOf(el) === index
                   })
+                  // response.forEach((item,index) =>{
+                  //   tempStatus.push(response[index].Status)
+                  // })
+                  // vm.statusType = tempStatus.filter((el, index, arr) => {
+                  //   return arr.indexOf(el) === index
+                  // })
                 });
               },
+              getStatedData(post){
+                let vm = this
+                let startFliter = vm.stared.indexOf(post)
+                if(starFilter === -1){
+                  post.star = true
+                  vm.stared.push(post)
+                }else{
+                  post.star = false
+                  vm.stared.splice(post , 1)
+                }
+              }
             },
             computed: {
               getSelectData() {
@@ -230,7 +266,17 @@
                   })
                 }
                 return selectData
-              }
+              },
+              // getTemp(){
+              //   let vm =this
+              //   let tempStatus = []
+              //   vm.data.forEach((item,index) =>{
+              //     tempStatus.push(data[index].Status)
+              //   })
+              //   vm.statusType = tempStatus.filter((el,index,arr) =>{
+              //     return arr.indexOf(el) === index
+              //   })
+              // }
             },
             created() {
               this.getData()
