@@ -119,7 +119,7 @@
         </div>
       </div>
 
-      <div class="col-md-9 post">
+      <div class="col-md-9">
         <!-- 練習開始 -->
         <h1 class="mt-0 text-muted">作業練習：元件變換</h1>
 
@@ -138,28 +138,30 @@
 
         <div id="app">
           <select name="" id="" class="form-control mb-3" v-model="filter">
-            <option value="">--- 請選擇城市 ---</option>
-            <option v-for="(item , key) in location" :value = "item"> {{ item }} </option>
+            <option value="" disabled>--- 請選擇城市 ---</option>
+            <option value="全部城市">全部城市</option>
+            <option v-for="(item , key) in location" :value="item"> {{ item }} </option>
           </select>
           <div>
             <h4>關注城市</h4>
             <div class="card-columns">
-              
-            <primary-component v-for></primary-component>
-
+              <primary-component v-for="(item,key) in stared" :key="key" @add="starHandler" :post="item"
+                v-if="item.star"></primary-component>
             </div>
           </div>
 
           <hr>
           <div class="card-columns">
-            <primary-component v-for="(item,key) in getSelectData" :key="key" :post="item" @add="getStatedData"></primary-component>
+            <primary-component v-for="(item,key) in getSelectData" :key="key" :post="item" @add="starHandler"
+              v-if="!item.star"></primary-component>
           </div>
         </div>
-  <script type="text/x-template" id="primary-component">
+
+        <script type="text/x-template" id="primary-component">
     <div class="card">
       <div class="card-header" :class="getStatusColor">{{ post.County }} - {{ post.SiteName }}
-        <a href="#" class="float-right" @click.prevent="getStatedData(post)" v-if="!post.star" :key="1"><i class="far fa-star"></i></a>
-        <a href="#" class="float-right" @click.prevent="getStatedData(post)" v-if="post.star" :key="2"><i class="fas fa-star"></i></a>
+        <a href="#" class="float-right" @click.prevent="addStar(post)" v-if="!post.star" :key="1"><i class="far fa-star"></i></a>
+        <a href="#" class="float-right" @click.prevent="addStar(post)" v-if="post.star" :key="2"><i class="fas fa-star"></i></a>
       </div>
       <div class="card-body">
         <ul class="list-unstyled">
@@ -179,31 +181,34 @@
           Vue.component('primary-component', {
             props: ['post'],
             template: '#primary-component',
-            methods:{
-              addStar(){
-                this.$emit('add',this.post)
+            methods: {
+              addStar() {
+                this.$emit("add", this.post)
               }
             },
-            computed:{
-              getStatusColor(){
-                switch(this.post.Status){
-                  case '良好':
-                    return 'status-aqi2'
+            computed: {
+              getStatusColor() {
+                switch (this.post.Status) {
+                  case "良好":
+                    return ""
                     break
-                  case '普通':
-                    return 'status-aqi3'
+                  case "普通":
+                    return "status-aqi2"
                     break
-                  case '對敏感族群不健康':
-                    return 'status-aqi4'
+                  case "對敏感族群不健康":
+                    return "status-aqi3"
                     break
-                  case '對所有族群不健康':
-                    return 'status-aqi5'
+                  case "對所有族群不健康":
+                    return "status-aqi4"
                     break
-                  case '設備維護':
-                    return 'status-aqi6'
+                  case "非常不健康":
+                    return "status-aqi5"
+                    break
+                  case "危害":
+                    return "status-aqi6"
                     break
                 }
-              }
+              },
             }
           })
           var app = new Vue({
@@ -213,70 +218,72 @@
               location: [],
               stared: [],
               filter: '',
-              // statusType: []
+              starStore: [],
             },
             // 請在此撰寫 JavaScript
             methods: {
               getData() {
-                let vm = this;
+                const vm = this;
                 const corsUrl = 'https://cors-anywhere.herokuapp.com/';
                 const api = 'http://opendata2.epa.gov.tw/AQI.json';
 
                 // 使用 jQuery ajax
-                $.get(api).then(function (response) {
+                $.get(corsUrl + api).then(function (response) {
                   vm.data = response;
                   let tempCountry = []
-                  // let tempStatus = []
                   response.forEach((item, index) => {
                     tempCountry.push(response[index].County)
                   })
                   vm.location = tempCountry.filter((el, index, arr) => {
                     return arr.indexOf(el) === index
                   })
-                  // response.forEach((item,index) =>{
-                  //   tempStatus.push(response[index].Status)
-                  // })
-                  // vm.statusType = tempStatus.filter((el, index, arr) => {
-                  //   return arr.indexOf(el) === index
-                  // })
+                  vm.starStore = JSON.parse(localStorage.getItem('siteName')) || []
+                  vm.starStore.forEach(item1 => {
+                    vm.data.forEach(item2 => {
+                      if (item2.SiteName == item1.SiteName) {
+                        item2.star = true
+                        vm.stared.push(item2)
+                      }
+                    })
+                  })
                 });
+
               },
-              getStatedData(post){
-                let vm = this
-                let startFliter = vm.stared.indexOf(post)
-                if(starFilter === -1){
+              starHandler(post) {
+                const vm = this
+                let postIndex = vm.stared.indexOf(post)
+                console.log(postIndex)
+                if (postIndex === -1) {
+                  console.log(post)
                   post.star = true
                   vm.stared.push(post)
-                }else{
+                } else {
+                  console.log(post)
                   post.star = false
-                  vm.stared.splice(post , 1)
+                  vm.stared.splice(postIndex, 1)
                 }
-              }
+                vm.starStore = []
+                vm.stared.forEach(item => {
+                  vm.starStore.push(item)
+                })
+                localStorage.setItem('siteName', JSON.stringify(vm.starStore))
+              },
+
             },
             computed: {
               getSelectData() {
-                let vm = this
+                const vm = this
                 let selectData = []
-                if (vm.filter == "") {
+                if (vm.filter == '全部城市' || vm.filter == '') {
                   selectData = vm.data
-                }else{
-                  selectData = vm.data.filter(item =>{
+                } else {
+                  selectData = vm.data.filter(item => {
                     return vm.filter == item.County
                     console.log(item)
                   })
                 }
                 return selectData
               },
-              // getTemp(){
-              //   let vm =this
-              //   let tempStatus = []
-              //   vm.data.forEach((item,index) =>{
-              //     tempStatus.push(data[index].Status)
-              //   })
-              //   vm.statusType = tempStatus.filter((el,index,arr) =>{
-              //     return arr.indexOf(el) === index
-              //   })
-              // }
             },
             created() {
               this.getData()
