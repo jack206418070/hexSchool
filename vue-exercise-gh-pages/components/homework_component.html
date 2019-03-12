@@ -142,7 +142,6 @@
             <option v-for="(item , key) in location" :value = "item"> {{ item }} </option>
           </select>
           <div>
-            <h4>關注城市</h4>
             <div class="card-columns">
               <primary-component v-for="(item,key) in stared" :key="key" @add="starHandler" :post="item" v-if="item.star"></primary-component>
             </div>
@@ -252,7 +251,7 @@
                   vm.stared.push(post)
                 }else{
                   post.star = false
-                  vm.stared.splice(post,1)
+                  vm.stared.splice(postIndex,1)
                 }
               }
             },

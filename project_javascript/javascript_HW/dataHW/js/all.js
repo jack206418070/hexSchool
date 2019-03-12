@@ -2605,84 +2605,51 @@ var countryData = [
 
 //透過陣列存取不重複的行鎮區
 
-var countryAllName = [];
-for(var i = 0; i < countryData.length; i++){
-    countryAllName.push(countryData[i].Zone);
+
+const API = "https://data.kcg.gov.tw/api/action/datastore_search?resource_id=92290ee5-6e61-456f-80c0-249eae2fcc97"
+
+let countryData2 = () =>{ 
+    fetch(API)
+        .then(res =>{
+            return res.json()
+        })
+        .then(post =>{
+            return console.log(post)
+        })
 }
 
-var countryName = [];
-countryAllName.forEach(function(country){
-    if(countryName.indexOf(country)==-1){
-        countryName.push(country);
-    }
-});
 
+let countryAllName = [];
 
-let testData = [
-    {
-        name: "Mary"
-    },
-    {
-        name: "Mary"
-    },
-    {
-        name: "Mary"
-    },
-    {
-        name: "Bob"
-    },
-    {
-        name: "Mary"
-    },
-    {
-        name: "Mary"
-    },
-    {
-        name: "Jack"
-    },
-    {
-        name: "Mary"
-    },
-    {
-        name: "ASS"
-    },
-    {
-        name: "Mary"
-    },
-    {
-        name: "Jerry"
-    },
-
-]
-
-
-// let testData = ["Mary","Mary","Mary","Mary","Jerry","Mary","Bob","Mary","Mary","Mary","Jack"]
-
-let result = []
-testData.forEach((item,index) =>{
-    result.push(testData[index].name)  
+countryData.forEach((item,index)=>{
+    countryAllName = [...countryAllName,item.Zone]
 })
+// for(var i = 0; i < countryData.length; i++){
+//     countryAllName.push(countryData[i].Zone);
+// }
 
-let repeat = result.filter((el,index,arr)=>{
-    return arr.indexOf(el) === index
+let countryName = [];
+
+countryName = countryAllName.filter((el,index,arr)=>{
+    return arr.indexOf(el)  === index
 })
 
 
-
-
-console.log(result)
-console.log(repeat)
-
+// countryAllName.forEach(function(country){
+//     if(countryName.indexOf(country)==-1){
+//         countryName.push(country);
+//     }
+// });
 
 
 
 
 //建立需要的DOM
-var Countryselect = document.getElementById("country");
-var optionList = document.querySelector(".choice");
-var dataList = document.querySelector(".list");
-var bgImg = document.querySelector(".photo");
-var btnClass = document.querySelector(".btnList");
+const Countryselect = document.getElementById("country");
+const optionList = document.querySelector(".choice");
+const dataList = document.querySelector(".list");
+const bgImg = document.querySelector(".photo");
+const btnClass = document.querySelector(".btnList");
 addCountry();
 init();
 
@@ -2693,12 +2660,16 @@ optionList.addEventListener("change",checkCountryData,false);
 btnClass.addEventListener("click",checkNode,false);
 
 
+
+
 //初始化上方選擇的城鎮 select
 function addCountry(){
-    var str="<option>--請選擇行政區--</option>";
-    var Len = countryName.length;
-    for(var i = 0;  i < Len; i++){
-        str+="<option class='opList'>"+countryName[i]+"</option>";
+    let str=`<option disabled>--請選擇行政區--</option>
+             <option value="全部區域">全部區域</option> `
+    let Len = countryName.length;
+    let i = 0
+    for(;  i < Len; i++){
+        str+=`<option class='opList'>${countryName[i]}</option>`;
     }
     Countryselect.innerHTML = str;
 }
@@ -2706,15 +2677,28 @@ function addCountry(){
 //初始化一開始介面
 
 function init(){
-    var str = "";
-    var Len = countryData.length;
-    for(var i = 0; i < Len; i++){
-        if(countryData[i].Zone == "前鎮區"){
-            str+="<li><div class='photo' style='background-image:url("+countryData[i].Picture1+")'><h4>"+countryData[i].Name+"</h4><p>"+countryData[i].Zone+"</p></div><div class='section'><p><img src='./images/icons_clock.png'> "+countryData[i].Opentime+"</p> <p><img src='./images/icons_pin.png'> "+countryData[i].Add+"</p> <p class='tag_left'><img src='./images/icons_phone.png'> "+countryData[i].Tel+"</p> <p class='tag_right'><img src='./images/icons_tag.png'> "+countryData[i].Ticketinfo+"</p></div></li>";
+    let str = "";
+    let Len = countryData.length;
+    let i = 0
+    for(; i < Len; i++){
+        if(countryData[i].Zone){
+            str+=`<li>
+                    <div class='photo' style='background-image:url(${countryData[i].Picture1})'>
+                        <h4>${countryData[i].Name}</h4>
+                        <p>${countryData[i].Zone}</p>
+                    </div>
+                    <div class='section'>
+                        <p><img src='./images/icons_clock.png'> ${countryData[i].Opentime}</p> 
+                        <p><img src='./images/icons_pin.png'>${countryData[i].Add}</p> 
+                        <p class='tag_left'><img src='./images/icons_phone.png'> ${countryData[i].Tel}</p> 
+                        <p class='tag_right'><img src='./images/icons_tag.png'> ${countryData[i].Ticketinfo}</p>
+                    </div>
+                  </li>
+                 `
         }
     }
     dataList.innerHTML = str;
-    document.querySelector(".countryId").textContent = "前鎮區";
+    document.querySelector(".countryId").textContent = "全部區域";
 }
 
 
@@ -2724,12 +2708,25 @@ function init(){
 function checkCountryData(e){
     switch(e.target.value){
         case e.target.value :
-            var str = "";
-            var Len = countryData.length;
-            for(var i = 0;  i < Len; i++){
+            let str = "";
+            let Len = countryData.length;
+            let i = 0
+            for(;  i < Len; i++){
                 if(e.target.value == countryData[i].Zone)
                 {
-                   str+="<li><div class='photo' style='background-image:url("+countryData[i].Picture1+")'><h4>"+countryData[i].Name+"</h4><p>"+countryData[i].Zone+"</p></div><div class='section'><p><img src='./images/icons_clock.png'> "+countryData[i].Opentime+"</p> <p><img src='./images/icons_pin.png'> "+countryData[i].Add+"</p> <p class='tag_left'><img src='./images/icons_phone.png'> "+countryData[i].Tel+"</p> <p class='tag_right'><img src='./images/icons_tag.png'> "+countryData[i].Ticketinfo+"</p></div></li>";
+                 str+=`<li>
+                   <div class='photo' style='background-image:url(${countryData[i].Picture1})'>
+                       <h4>${countryData[i].Name}</h4>
+                       <p>${countryData[i].Zone}</p>
+                   </div>
+                   <div class='section'>
+                       <p><img src='./images/icons_clock.png'> ${countryData[i].Opentime}</p> 
+                       <p><img src='./images/icons_pin.png'>${countryData[i].Add}</p> 
+                       <p class='tag_left'><img src='./images/icons_phone.png'> ${countryData[i].Tel}</p> 
+                       <p class='tag_right'><img src='./images/icons_tag.png'> ${countryData[i].Ticketinfo}</p>
+                   </div>
+                 </li>
+                `
                 }
             }
             document.querySelector(".countryId").textContent = e.target.value;
@@ -2740,18 +2737,30 @@ function checkCountryData(e){
 
 
 function checkNode(e){
+    e.preventDefault();
     if(e.target.nodeName !== "A"){return};
-    var str = "";
-    var Len = countryData.length;
-    var text = e.target.innerHTML;
+    let text = e.target.innerHTML;
     switch(text){
         case text :
-            var str = "";
-            var Len = countryData.length;
-            for(var i = 0;  i < Len; i++){
+            let str = "";
+            let Len = countryData.length;
+            let i = 0
+            for(;  i < Len; i++){
                 if(text == countryData[i].Zone)
                 {
-                   str+="<li><div class='photo' style='background-image:url("+countryData[i].Picture1+")'><h4>"+countryData[i].Name+"</h4><p>"+countryData[i].Zone+"</p></div><div class='section'><p><img src='./images/icons_clock.png'> "+countryData[i].Opentime+"</p> <p><img src='./images/icons_pin.png'> "+countryData[i].Add+"</p> <p class='tag_left'><img src='./images/icons_phone.png'> "+countryData[i].Tel+"</p> <p class='tag_right'><img src='./images/icons_tag.png'> "+countryData[i].Ticketinfo+"</p></div></li>";
+                str+=`<li>
+                        <div class='photo' style='background-image:url(${countryData[i].Picture1})'>
+                            <h4>${countryData[i].Name}</h4>
+                            <p>${countryData[i].Zone}</p>
+                        </div>
+                        <div class='section'>
+                            <p><img src='./images/icons_clock.png'> ${countryData[i].Opentime}</p> 
+                            <p><img src='./images/icons_pin.png'>${countryData[i].Add}</p> 
+                            <p class='tag_left'><img src='./images/icons_phone.png'> ${countryData[i].Tel}</p> 
+                            <p class='tag_right'><img src='./images/icons_tag.png'> ${countryData[i].Ticketinfo}</p>
+                        </div>
+                      </li>
+                    `
                 }
             }
             document.querySelector(".countryId").textContent = text;
