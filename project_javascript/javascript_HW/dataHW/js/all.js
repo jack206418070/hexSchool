@@ -2618,54 +2618,12 @@ countryAllName.forEach(function(country){
 });
 
 
-let testData = [
-    {
-        name: "Mary"
-    },
-    {
-        name: "Mary"
-    },
-    {
-        name: "Mary"
-    },
-    {
-        name: "Bob"
-    },
-    {
-        name: "Mary"
-    },
-    {
-        name: "Mary"
-    },
-    {
-        name: "Jack"
-    },
-    {
-        name: "Mary"
-    },
-    {
-        name: "ASS"
-    },
-    {
-        name: "Mary"
-    },
-    {
-        name: "Jerry"
-    },
 
-]
 
 
 // let testData = ["Mary","Mary","Mary","Mary","Jerry","Mary","Bob","Mary","Mary","Mary","Jack"]
 
-let result = []
-testData.forEach((item,index) =>{
-    result.push(testData[index].name)  
-})
 
-let repeat = result.filter((el,index,arr)=>{
-    return arr.indexOf(el) === index
-})
 
 
 
