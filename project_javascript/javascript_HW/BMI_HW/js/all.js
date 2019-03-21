@@ -1,10 +1,10 @@
 
 //取得BOM的資訊
-var high = document.querySelector("#high");
-var weight = document.querySelector("#weight");
-var btn = document.querySelector(".btnClass");
-var addList = document.querySelector(".dataList");
-var data = JSON.parse(localStorage.getItem("listdata")) || [];
+let high = document.querySelector("#high");
+let weight = document.querySelector("#weight");
+let btn = document.querySelector(".btnClass");
+let addList = document.querySelector(".dataList");
+let data = JSON.parse(localStorage.getItem("listdata")) || [];
 updateList(data);
 changeColor(data);
 
@@ -20,9 +20,10 @@ addList.addEventListener("click",delData,false);
 //渲染初始網頁
 
 function updateList(items) {
-    var str = "";
-    var Len = items.length;
-    for (var i = 0; i < Len; i++) {
+    let str = "";
+    let Len = items.length;
+    let i = 0
+    for (; i < Len; i++) {
         str += "<li id='dataSet" + i + "num'><table><tr><td><span class='one'>" + items[i].Result + "</span></td> <td>BMI <span class='one'>" + items[i].BMI + "</span></td> <td>weight <span class='one'>" + items[i].Weight + "</span></td> <td>height <span class='one'>" + items[i].Height + "</span></td> <td><a href= '#' data-num = '"+i+"'>刪除</a></td> </tr></table></li>";
     }
     addList.innerHTML = str;
@@ -31,7 +32,7 @@ function updateList(items) {
 //刪除資料
 
 function delData(e){
-    var nodeNum = e.target.dataset.num;
+    let nodeNum = e.target.dataset.num;
     if(e.target.nodeName !== "A"){return};
     data.splice(nodeNum,1);
     localStorage.setItem("listData",JSON.stringify(data));
@@ -46,11 +47,11 @@ function getData() {
         alert("請填寫數量進入上方表格");
         return;
     }
-    var getHigh = parseInt(high.value);
-    var HighM = getHigh / 100;
-    var getWeight = parseInt(weight.value);
-    var bmi = getWeight / (HighM * HighM);
-    var result;
+    let getHigh = parseInt(high.value);
+    let HighM = getHigh / 100;
+    let getWeight = parseInt(weight.value);
+    let bmi = getWeight / (HighM * HighM);
+    let result;
     bmi = bmi.toFixed(2);
     if (bmi >= 16 && bmi < 18.5) {
         result = "過輕";
@@ -74,7 +75,7 @@ function getData() {
         result = "嚴重過輕";
         controlRight(bmi, result);
     }
-    var bodyInfo = {
+    let bodyInfo = {
         Result: result,
         BMI: bmi,
         Weight: getWeight,
@@ -87,8 +88,9 @@ function getData() {
 }
 
 function changeColor(items) {
-    var Len = items.length;
-    for (var i = 0; i < Len; i++) {
+    let Len = items.length;
+    let i = 0
+    for (; i < Len; i++) {
         switch (items[i].Result) {
             case "過輕":
                 document.getElementById("dataSet" + i + "num").style.borderLeftColor = "#31BAF9";
