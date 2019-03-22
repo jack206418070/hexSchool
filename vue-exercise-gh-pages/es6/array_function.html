@@ -119,33 +119,90 @@ const people = [
     name: '杰倫',
     money: 60000
   },
-  {
-    name: '老媽',
-    money: Infinity
-  }
+  // {
+  //   name: '老媽',
+  //   money: Infinity
+  // }
 ];
 
 // forEach 與 map
 // 將所有物件增加 icash 有多少金額的欄位
+// people.forEach((item,index,arr) =>{
+//   item.icash = item.money + 500
+// })
+// console.log(people)
+// let newPeople = people.map((item, index, arr)=>{
+//   return {
+//     ...item,
+//     icash : item.money + 500
+//   }
+// })
+// console.log(newPeople)
+
 
 
 // filter
 // 挑出金額少於 5000 的物件
 
+// let filterMoney = people.filter((item, index, arr)=>{
+//   if(item.money < 5000){
+//     return item
+//   }
+// })
+// console.log(filterMoney)
+
+
+
 // find
 // 1. 找到金額 = 500 的物件
 // 2. 找到 > 5000 的物件
 
-// every
+// tip find只能回傳一個值  最好使用在只需要找到單值的情況
+// let findMoney = people.find((item, index, arr)=>{
+//   return item.money === 500
+//   // if(item.money > 5000){
+//   //   return item
+//   // }
+// })
+// console.log(findMoney)
+
+
+
+
+// every (若所有 物件屬性都符合條件 回傳true 否則回傳false &&)
 // 1. 所有物件是否都超過 10000 元
 // 2. 是否所有物件超過 300 元
+let ans = people.every((item, index)=>{
+  // return item.money > 30000
+  return item.money > 300
+})
+console.log(ans)
 
-// some
+
+// some (其中一個有符合條件 回傳true 都不符合 回傳false)
 // 1. 是否有物件超過 10000 元
 // 2. 是否有物件持有金額少於 300元
 
+let ans2 = people.some((item, index) =>{
+  // return item.money > 10000
+  return item.money < 300
+})
+
+console.log(ans2)
 // reduce
 // 去除掉老媽，請問剩下的人有多少錢？
+// 用來加總所有總和 prev = 前一個得到的值 func , (預設值)  next為下個值
+// let newResult = people.reduce((prev, item, index)=>{
+//   return prev + item.money 
+// },0)
+
+// console.log(newResult)
+
+let maxMoney = people.reduce((prev, item, index)=>{
+  return Math.max(prev , item.money)
+},0)
+
+console.log(maxMoney)
 
 </script> 
         </div>

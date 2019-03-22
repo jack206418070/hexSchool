@@ -113,9 +113,12 @@ console.log(callSomeone('小明'))
 
 // # 沒有 arguments 參數
 // 將以下改寫成 Arrow Function，並觀察差異
-// const updateEasyCard = function () {
+// const updateEasyCard = (...arg) => {
 //   let cash = 0;
-//   console.log(arguments); // arguments is not defined
+//   cash = arg.reduce((prev, next)=>{
+//     return prev + next
+//   })
+//   console.log(cash + '元'); // arguments is not defined
 // }
 // updateEasyCard(10, 50, 100, 50, 5, 1, 1, 1, 500);
 
