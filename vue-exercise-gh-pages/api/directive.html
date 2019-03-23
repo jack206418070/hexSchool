@@ -97,7 +97,7 @@
 </div>
 
 <div id="app">
-  <input type="email" v-model="email" v-focus v-validator="{ className: 'form-control' }">
+  <input type="email" v-model="email" v-focus v-validation = "{className: 'form-control' }">
 </div>
 
 <script>
@@ -108,43 +108,73 @@ Vue.directive('focus', {
   }
 })
 
-Vue.directive('validator', {
-  update: function(el, binding, vnode) {
-    console.log('update', el.value, el.className, vnode);
-
-    // 尋找當前的 model 名稱
-    var currentModel = vnode.data.directives.find(function(o) {
-        return o.name === 'model';
-    }).expression;
-    
-    // 從當前 Model 取值
-    var value = vnode.context[currentModel];
-
-    // Email validate
-    var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    if (!re.test(value)) {
+Vue.directive('validation',{
+  update: function(el, binding, vnode){
+    console.log('update',el, binding, vnode)
+    let value = el.value
+    console.log(value)
+    let re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    console.log(value,re.test(value))
+    if(!re.test(value)){
       el.className = 'form-control is-invalid'
-    } else {
+    }else{
       el.className = 'form-control is-valid'
     }
   },
-  bind: function(el, binding, vnode) {
-    console.log('bind', el, binding, vnode);
+  bind: function(el, binding, vnode){
+    console.log('binding',el, binding, vnode)
     el.className = binding.value.className
 
-    var currentModel = vnode.data.directives.find(function(o) {
-        return o.name === 'model';
-    }).expression;
-    var value = vnode.context[currentModel];
+    //v-model
+    //v-model 將直取出
+    
+    let vModel = vnode.data.directives.find(item =>{
+      return item.name == 'model'
+    }).expression
+    
+    let value = vnode.context[vModel];
 
-    var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    if (!re.test(value)) {
-      el.className = 'form-control is-invalid'
-    } else {
-      el.className = 'form-control is-valid'
-    }
+    console.log('Vmodel: ',vModel , value)
   }
-});
+})
+
+// Vue.directive('validator', {
+//   update: function(el, binding, vnode) {
+//     console.log('update', el.value, el.className, vnode);
+
+//     // 尋找當前的 model 名稱
+//     var currentModel = vnode.data.directives.find(function(o) {
+//         return o.name === 'model';
+//     }).expression;
+    
+//     // 從當前 Model 取值
+//     var value = vnode.context[currentModel];
+
+//     // Email validate
+//     var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+//     if (!re.test(value)) {
+//       el.className = 'form-control is-invalid'
+//     } else {
+//       el.className = 'form-control is-valid'
+//     }
+//   },
+//   bind: function(el, binding, vnode) {
+//     console.log('bind', el, binding, vnode);
+//     el.className = binding.value.className
+
+//     var currentModel = vnode.data.directives.find(function(o) {
+//         return o.name === 'model';
+//     }).expression;
+//     var value = vnode.context[currentModel];
+
+//     var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+//     if (!re.test(value)) {
+//       el.className = 'form-control is-invalid'
+//     } else {
+//       el.className = 'form-control is-valid'
+//     }
+//   }
+// });
 
 var app = new Vue({
   el: '#app',
