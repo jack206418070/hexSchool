@@ -59,7 +59,7 @@ table {
 }
 
 .topbar{
-    width: 1000px;
+    
     height: 40px;
     margin: 0 auto;
     margin-bottom: 30px;
@@ -100,9 +100,9 @@ table {
 .header{
     position: relative;
     margin: 0 auto;
-    width: 1000px;
-    height: 40px;
-    margin-bottom: 40px;
+    
+    /* height: 40px; */
+    margin-bottom: 100px;
 }
 
 .logo{
@@ -156,119 +156,50 @@ table {
 
 
 
-.action{
-    margin: 0 auto;
-    width: 1000px;
-    height: 346px;
-    margin-bottom: 50px;
-    position: relative;
-}
 
-/* .action p{
-    position: absolute;
-    color: white;
-    padding-left: 20px;
-    font-size: 35px;
-    font-family:Microsoft JhengHei;
-    z-index: 999;
-} */
 
-/* .action img{
-    position: absolute;
-    z-index: -999;
-} */
 
 .swiper-container{
     z-index:-1;
     height: 360px;
-    width: 1000px;
 }
 
-/* .prg{
-    padding-top: 130px;
-    padding-bottom: 10px;
-}
 
-.prg2{
-    padding-top: 180px;
-    padding-bottom: 10px;
-} */
+
 .article{
-    height: 400px;
-    width: 1000px;
-    margin: 0 auto;
-    margin-bottom: 50px;
+    height: auto;
+    width: 100%;
+    margin: 50px;
 }
 
-.left{
-    height: auto;
-    width: 315px;
-    float: left;
-    margin-left: 16px;
-    border-bottom: 5px solid #f7f7f7;
+.article > ul{
+    display: flex;
+    justify-content: center;
 }
 
-.middle{
-    height: auto;
-    width: 315px;
-    float: left;
-    margin-left: 16px;
-    border-bottom: 5px solid #f7f7f7;
-    
+.article  h3{
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-left: 80px;
 }
 
-.right{
-    height: auto;
-    width: 315px;
-    float: left;
-    margin-left: 22px;
-    border-bottom: 5px solid #f7f7f7;
-    
+.article p{
+    width: 85%;
+    line-height: 25px;
+    font-size: 16px;
+    letter-spacing: 2px;
 }
 
 .article img{
     margin-bottom: 10px;
 }
 
-.article .right img{
-    margin-left: 20px;
-}
 
-.article h3{
-    font-weight: bold;
-    font-size: 20px;
-    font-family:Microsoft JhengHei;
-    text-align: center;
-}
-
-.left p{
-    font-size: 16px;
-    padding: 12px;
-    line-height: 30px;
-    letter-spacing: 2px;
-}
-
-.right p{
-    padding: 15px 15px 5px 15px;
-}
-
-.right ul{
-    margin-left: 40px;
-    padding-bottom: 42px;
-}
-
-.right li{
-    font-size: 16px;
-    padding: 4px;
+.article ul  ul{
     list-style: initial;
 }
 
-.middle p{
-    font-size: 16px;
-    padding: 15px;
-    line-height: 24px;
-    letter-spacing: 2px;
-}
+
 .clearfix{
     clear: both;
 }
@@ -304,7 +235,7 @@ h2{
 
 .form_box{
     margin: 0 auto;
-    width: 1000px;
+    
     height: 500px;
     /* background: url("../imG/bg.png"); */
     background: -webkit-linear-gradient(left,#00644b,#007658);
@@ -363,9 +294,15 @@ label{
     color:white;
 }
 
+.submit_input:hover{
+    color: black;
+    background: lightcoral;
+}
+
+
 .footer{
     height: 40px;
-    width: 1000px;
+    
     margin: auto;
     background: url("../images/footer.png") no-repeat;
     margin-bottom: 40px;
