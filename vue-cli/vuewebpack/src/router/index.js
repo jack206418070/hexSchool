@@ -14,6 +14,8 @@ Vue.use(VueRouter)
 
 
 export default new VueRouter({
+    // mode:'history',
+    // linkActiveClass:'active',
     routes:[
         {
             name:'首頁',   //元件呈現的名稱
@@ -44,7 +46,7 @@ export default new VueRouter({
                     path:'child3', //對應的虛擬路徑
                     component: child3, //對應的原件
                 },
-            ]
+            ],
         },
 
     ],
