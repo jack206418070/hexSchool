@@ -1,8 +1,6 @@
 <template>
   <div>
-    <loading
-      :active.sync="isLoading"
-    ></loading>
+    <loading :active.sync="isLoading"></loading>
     <div class="text-right mt-4">
       <button class="btn btn-primary" @click.prevent="openModal(true)">新增商品</button>
     </div>
@@ -42,7 +40,8 @@
         </tr>
       </tbody>
     </table>
-    <!-- Modal -->
+    <!--page-->
+    <Page :pagination = "pagination" v-on:getPageProducts = "getProducts"/>
     <div
       class="modal fade"
       id="productModal"
@@ -225,74 +224,77 @@
 
 
 <script>
-import $ from "jquery";
-
+import $ from "jquery"
+import Page from '../Pagination'
 export default {
   data() {
     return {
       products: [],
+      pagination: {},
       tempProduct: {},
       isNew: false,
-      isLoading:false,
-      status:{
+      isLoading: false,
+      status: {
         fileUploading: false
-      },
-    };
+      }
+    }
   },
   methods: {
-    getPorducts() {
-      const vm = this;
+    getProducts(page = 1) {
+      const vm = this
       const api = `${process.env.APIPATH}/api/${
         process.env.CUSTOMEPATH
-      }/products`;
+      }/products?page=${page}`
       vm.isLoading = true
       vm.$http.get(api).then(response => {
-        console.log(response.data);
+        console.log(response.data)
         vm.isLoading = false
-        this.products = response.data.products;
-      });
+        this.products = response.data.products
+        vm.pagination = response.data.pagination
+      })
     },
     openModal(isNew, item) {
       if (isNew) {
-        this.tempProduct = {};
-        this.isNew = true;
+        this.tempProduct = {}
+        this.isNew = true
       } else {
-        this.tempProduct = Object.assign({}, item);
-        this.isNew = false;
+        this.tempProduct = Object.assign({}, item)
+        this.isNew = false
       }
-      $("#productModal").modal("show");
+      $("#productModal").modal("show")
     },
     openDelModal(item) {
-      this.tempProduct = Object.assign({}, item);
-      $("#delProductModal").modal("show");
+      this.tempProduct = Object.assign({}, item)
+      $("#delProductModal").modal("show")
     },
     deleteProduct() {
-      const vm = this;
+      const vm = this
       let api = `${process.env.APIPATH}/api/${
         process.env.CUSTOMEPATH
-      }/admin/product/${vm.tempProduct.id}`;
+      }/admin/product/${vm.tempProduct.id}`
       vm.$http.delete(api).then(res => {
-        console.log(res.data);
+        console.log(res.data)
         if (res.data.success) {
-          $("#delProductModal").modal("hide");
-          vm.getPorducts();
+          $("#delProductModal").modal("hide")
+          vm.getProducts()
+          this.$bus.$emit("messsage:push", res.data.message, "success")
         } else {
-          $("#delProductModal").modal("hide");
-          vm.getPorducts();
-          console.log("刪除失敗");
+          $("#delProductModal").modal("hide")
+          vm.getProducts()
+          this.$bus.$emit("messsage:push", res.data.message, "danger")
         }
-      });
+      })
     },
     uploadFile() {
-      console.log(this);
-      const uploadedFile = this.$refs.files.files[0];
-      const vm = this;
+      console.log(this)
+      const uploadedFile = this.$refs.files.files[0]
+      const vm = this
       vm.status.fileUploading = true
-      const formData = new FormData();
-      formData.append("file-to-upload", uploadedFile);
+      const formData = new FormData()
+      formData.append("file-to-upload", uploadedFile)
       const url = `${process.env.APIPATH}/api/${
         process.env.CUSTOMEPATH
-      }/admin/upload`;
+      }/admin/upload`
       this.$http
         .post(url, formData, {
           headers: {
@@ -302,38 +304,45 @@ export default {
         .then(res => {
           vm.status.fileUploading = false
           if (res.data.success) {
-            vm.$set(vm.tempProduct, "image", res.data.imageUrl);
+            vm.$set(vm.tempProduct, "image", res.data.imageUrl)
+            this.$bus.$emit("messsage:push", "上傳成功", "success")
+          } else {
+            this.$bus.$emit("messsage:push", res.data.message, "danger")
           }
-        });
+        })
     },
     updateProduct() {
-      const vm = this;
-      let httpMethod = "post";
+      const vm = this
+      let httpMethod = "post"
       let api = `${process.env.APIPATH}/api/${
         process.env.CUSTOMEPATH
-      }/admin/product`;
+      }/admin/product`
       if (!vm.isNew) {
         api = `${process.env.APIPATH}/api/${
           process.env.CUSTOMEPATH
-        }/admin/product/${vm.tempProduct.id}`;
-        httpMethod = "put";
+        }/admin/product/${vm.tempProduct.id}`
+        httpMethod = "put"
       }
 
       vm.$http[httpMethod](api, { data: vm.tempProduct }).then(response => {
-        console.log(response.data);
+        console.log(response.data)
         if (response.data.success) {
-          $("#productModal").modal("hide");
-          vm.getPorducts();
+          $("#productModal").modal("hide")
+          vm.getProducts()
+          this.$bus.$emit("messsage:push", response.data.message, "success")
         } else {
-          $("#productModal").modal("hide");
-          vm.getPorducts();
-          console.log("新增失敗");
+          $("#productModal").modal("hide")
+          vm.getProducts()
+          this.$bus.$emit("messsage:push", "新增失敗", "danger")
         }
-      });
+      })
     }
   },
   created() {
-    this.getPorducts();
+    this.getProducts()
+  },
+  components:{
+    Page
   }
-};
+}
 </script>
