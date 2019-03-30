@@ -14,15 +14,6 @@ export default {
       data: {}
     };
   },
-  created() {
-    const api = `${process.env.APIPATH}/api/${
-      process.env.CUSTOMEPATH
-    }/products`;
-    // API 伺服器路徑   and  所申請的api-Path
-    this.$http.get(api).then(response => {
-      this.data = response.data;
-    });
-  }
 };
 </script>
 
