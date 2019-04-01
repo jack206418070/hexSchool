@@ -7,12 +7,12 @@
     <table class="table mt-4">
       <thead>
         <tr>
-          <th width="120">商品類型</th>
+          <th width="140">商品類型</th>
           <th>商品名稱</th>
           <th width="140">單位</th>
-          <th width="140">原價</th>
-          <th width="140">特價</th>
-          <th width="100" class="text-center">啟用狀態</th>
+          <th width="140" class="text-center">原價</th>
+          <th width="140" class="text-center">特價</th>
+          <th width="100" >啟用狀態</th>
           <th class="text-center" width="140">編輯</th>
         </tr>
       </thead>
@@ -21,8 +21,8 @@
           <td>{{ item.category }}</td>
           <td>{{ item.title }}</td>
           <td>{{ item.unit }}</td>
-          <td class="text-right">{{ item.origin_price }}</td>
-          <td class="text-right">{{ item.price }}</td>
+          <td class="text-right">{{ item.origin_price | currency }}</td>
+          <td class="text-right">{{ item.price | currency }}</td>
           <td class="text-center">
             <span v-if="item.is_enabled" class="text-success">啟用</span>
             <span v-else class="text-danger">未啟用</span>
@@ -86,7 +86,7 @@
                     ref="files"
                   >
                 </div>
-                <img :src="tempProduct.image" class="img-fluid" alt>
+                <img :src="tempProduct.image || tempProduct.imageUrl" class="img-fluid" alt>
               </div>
               <div class="col-sm-8">
                 <div class="form-group">
@@ -244,7 +244,7 @@ export default {
       const vm = this
       const api = `${process.env.APIPATH}/api/${
         process.env.CUSTOMEPATH
-      }/products?page=${page}`
+      }/admin/products?page=${page}`
       vm.isLoading = true
       vm.$http.get(api).then(response => {
         console.log(response.data)
@@ -304,7 +304,7 @@ export default {
         .then(res => {
           vm.status.fileUploading = false
           if (res.data.success) {
-            vm.$set(vm.tempProduct, "image", res.data.imageUrl)
+            vm.$set(vm.tempProduct, "imageUrl", res.data.imageUrl)
             this.$bus.$emit("messsage:push", "上傳成功", "success")
           } else {
             this.$bus.$emit("messsage:push", res.data.message, "danger")

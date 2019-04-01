@@ -10,9 +10,12 @@ import 'vue-loading-overlay/dist/vue-loading.css'
 import App from './App'
 import router from './router'
 import './bus'
+import CurrencyFilter from './filters/currency'
  
 Vue.use(VueAxios, axios)
 Vue.component('Loading' , Loading)
+Vue.filter('currency', CurrencyFilter)
+
 axios.defaults.withCredentials = true
 Vue.config.productionTip = false
 
